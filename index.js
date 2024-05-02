@@ -106,20 +106,20 @@ searchInput.addEventListener('keypress', (event) => {
     }
 });
 
-searchInput.addEventListener("input" , (e) => {
-    debounce(() => {
-        getVideo(e.target.value)
-    },1000);
+// searchInput.addEventListener("input" , (e) => {
+//     debounce(() => {
+//         getVideo(e.target.value)
+//     },1000);
 
-});
+// });
 
-let timeout ;
-function debounce(callback,delay){
-    clearTimeout(timeout);
-    timeout = setTimeout(()=>{
-        callback();
-    },delay);
-}
+// let timeout ;
+// function debounce(callback,delay){
+//     clearTimeout(timeout);
+//     timeout = setTimeout(()=>{
+//         callback();
+//     },delay);
+// }
 
 
 const options = document.getElementsByClassName("filter-options");
