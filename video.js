@@ -1,5 +1,6 @@
 const API_KEY = "AIzaSyCW9pYzBcfM9-0OXGPtkA9RkRm0Dj8cx7M";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
+let channel_http = "https://www.googleapis.com/youtube/v3/channels?";
 
 window.addEventListener('load', () => {
     const search = window.location.search;
@@ -15,15 +16,16 @@ window.addEventListener('load', () => {
                 autoplay: 1,
                 controls: 1,
                 modestbranding: 1,
-                loop: 0
+                loop: 1
             }
         });
     }
 
+    console.log(disc.innerHTML);
     async function getChannelDetails(channelId) {
         try {
-            const response = await fetch(`${BASE_URL}/channels?key=${API_KEY}&part=snippet&id=${channelId}`);
-            const data = await response.json();
+            const res = await fetch(`${BASE_URL}/channels?key=${API_KEY}&part=snippet&id=${channelId}`);
+            const data = await res.json();
             console.log(data);
         } catch (error) {
             console.error('Error fetching channel details:', error);
@@ -32,8 +34,8 @@ window.addEventListener('load', () => {
 
     async function getVideoDetails() {
         try {
-            const response = await fetch(`${BASE_URL}/videos?key=${API_KEY}&part=snippet&id=${videoId}`);
-            const data = await response.json();
+            const res = await fetch(`${BASE_URL}/videos?key=${API_KEY}&part=snippet&id=${videoId}`);
+            const data = await res.json();
             console.log(data);
 
             const vidDetailsElement = document.getElementById('vid-Details');

@@ -8,26 +8,16 @@
     outline: none;
 }
 
-
-.dark{
-    background-color: black;
-    color: white;
-}
-.light{
-    background-color: white;
-    color: black;
-}
-
 body{
     position: relative;
     font-family: 'roboto', sans-serif;
 }
 
-.navbar{
+nav{
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 1002;
     width: 100%;
     height: 60px;
     display: flex;
@@ -62,7 +52,7 @@ body{
 
 .logo{
     height: 30px;
-    margin: -10px 30px 0;
+    margin: 0 30px;
 }
 
 .search-box{
@@ -113,8 +103,7 @@ body{
 .user-dp{
     cursor: pointer;
     height: 30px;
-    width: 30px;
-    border-radius: 50%;
+    width: 40px;
     overflow: hidden;
 }
 
@@ -122,18 +111,20 @@ body{
     width: 100%;
     height: 100%;
     object-fit: cover;
+    overflow: hidden;
+    border-radius: 50%;
 }
 
 /* filter */
 
-.filters{
+#filters{
     position: fixed;
     top: 60px;
     left: 0;
     width:100%;
     height: 60px;
-    background: #fff;
-    z-index: 101;
+    z-index: 1001;
+    background-color: white;
     border-top: 2px solid #c2c1c1;
     border-bottom: 2px solid #c1c1c1;
     padding: 0 20px;
@@ -143,7 +134,7 @@ body{
     overflow-y: hidden;
 }
 
-.filters::-webkit-scrollbar{
+#filters::-webkit-scrollbar{
     display: none;
 }
 
@@ -200,7 +191,6 @@ body{
     display: flex;
     align-items: center;
     text-transform: capitalize;
-    color: black;
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
@@ -248,7 +238,7 @@ body{
 .thumbnail{
     width: 100%;
     height: 200px;
-    border-radius: 5px;
+    border-radius: 10px;
     object-fit:cover;
 }
 

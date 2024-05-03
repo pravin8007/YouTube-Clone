@@ -6,34 +6,43 @@ let video_http = "https://www.googleapis.com/youtube/v3/videos?";
 let channel_http = "https://www.googleapis.com/youtube/v3/channels?";
 
 
-fetch(video_http + new URLSearchParams({
-    key: api_key,
-    part: 'snippet',
-    chart: 'mostPopular',
-    maxResults: 50,
-    regionCode: 'IN'
-}))
-    .then(res => res.json())
-    .then(data => {
+async function fetchYouTubeData() {
+    try {
+        const res = await fetch(video_http + new URLSearchParams({
+            key: api_key,
+            part: 'snippet',
+            chart: 'mostPopular',
+            maxResults: 50,
+            regionCode: 'IN'
+        }));
+        const data = await res.json();
         console.log(data);
-        data.items.forEach(item => {
-            getChannelIcon(item);
-        })
-    })
-    .catch(err => console.log(err));
-
-const getChannelIcon = (video_data) => {
-    fetch(channel_http + new URLSearchParams({
-        key: api_key,
-        part: 'snippet',
-        id: video_data.snippet.channelId
-    }))
-        .then(res => res.json())
-        .then(data => {
-            video_data.channelThumbnail = data.items[0].snippet.thumbnails.default.url;
-            makeVideoCard(video_data);
-        })
+        data.items.forEach(async item => {
+            await getChannelIcon(item);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
+
+// Call the async function
+fetchYouTubeData();
+
+const getChannelIcon = async (video_data) => {
+    try {
+        const res = await fetch(channel_http + new URLSearchParams({
+            key: api_key,
+            part: 'snippet',
+            id: video_data.snippet.channelId
+        }));
+        const data = await res.json();
+        video_data.channelThumbnail = data.items[0].snippet.thumbnails.default.url;
+        makeVideoCard(video_data);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 const makeVideoCard = (data) => {
     // console.log(data);
@@ -106,22 +115,6 @@ searchInput.addEventListener('keypress', (event) => {
     }
 });
 
-// searchInput.addEventListener("input" , (e) => {
-//     debounce(() => {
-//         getVideo(e.target.value)
-//     },1000);
-
-// });
-
-// let timeout ;
-// function debounce(callback,delay){
-//     clearTimeout(timeout);
-//     timeout = setTimeout(()=>{
-//         callback();
-//     },delay);
-// }
-
-
 const options = document.getElementsByClassName("filter-options");
 let len = options.length;
 
@@ -135,4 +128,3 @@ for(let i = 0 ; i < len ; i++){
         getVideo(options[i].textContent);
     }
 }
-
